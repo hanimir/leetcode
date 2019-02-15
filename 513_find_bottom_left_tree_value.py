@@ -11,7 +11,6 @@ class Solution(object):
     :type root: TreeNode
     :rtype: int
     """
-    previous_level = []
     current_level = [root]
     next_level = []
 
@@ -22,10 +21,10 @@ class Solution(object):
 
         if node.right:
           next_level.append(node.right)
-      
+
       if next_level == []:
         return current_level[0].val
-      
+
       current_level = next_level
       next_level = []
 
@@ -41,7 +40,7 @@ class TestSolution:
     actual = self.solution.findBottomLeftValue(root)
 
     assert actual == expected
-  
+
   def test_small_tree(self):
     root = TreeNode(1)
     root.left = TreeNode(2)
@@ -51,7 +50,7 @@ class TestSolution:
     actual = self.solution.findBottomLeftValue(root)
 
     assert actual == expected
-  
+
   def test_large_tree(self):
     root = TreeNode(1)
     root.left = TreeNode(2)
@@ -63,7 +62,7 @@ class TestSolution:
     actual = self.solution.findBottomLeftValue(root)
 
     assert actual == expected
-  
+
   def test_large_tree_in_right_half(self):
     root = TreeNode(1)
     root.left = TreeNode(2)
@@ -76,7 +75,7 @@ class TestSolution:
     actual = self.solution.findBottomLeftValue(root)
 
     assert actual == expected
-  
+
   def run_test(self, test, test_name):
     print('Running {}...'.format(test_name))
 
@@ -86,7 +85,7 @@ class TestSolution:
       print('Failed {}'.format(test_name))
     else:
       print('Passed {}!'.format(test_name))
-  
+
   def run_tests(self):
     self.run_test(self.test_one_node, 'test_one_node')
     self.run_test(self.test_small_tree, 'test_small_tree')
@@ -95,4 +94,3 @@ class TestSolution:
 
 tester = TestSolution()
 tester.run_tests()
-    
