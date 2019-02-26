@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class Solution:
 
   def canFinish(self, numCourses, prerequisites):
@@ -12,7 +15,15 @@ class Solution:
     if numCourses == 1:
       return True
 
-    start_courses = set([i for i in xrange(numCourses)])
+    prerequisite_dict = defaultdict(list)
+    for course, prereq in prerequisites:
+      prerequisite_dict[prereq].append(course)
+
+    prereqs_for_course = defaultdict(set)
+    for course, prereq in prerequisites:
+      prereqs_for_course[course].add(prereq)
+
+    start_courses = set(range(numCourses))
     for [course, _] in prerequisites:
       if course in start_courses:
         start_courses.remove(course)
@@ -21,12 +32,12 @@ class Solution:
     while start_courses:
       course = start_courses.pop()
       sorted_courses.append(course)
-      for
+      for next_course in prerequisite_dict[course]:
+        prereqs_for_course[next_course].remove(course)
+        if not prereqs_for_course[next_course]:
+          start_courses.add(next_course)
 
-    import pdb; pdb.set_trace()
-
-    return False
-
+    return len(sorted_courses) == numCourses
 
 
 class TestSolution:

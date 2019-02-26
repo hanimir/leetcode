@@ -5,6 +5,9 @@ class Solution:
 
     for i in range(len(nums)):
       for j in range(nums[i] + 1):
+        if can_reach_this_position[-1]:
+          return True
+
         if i + j < len(nums):
           can_reach_this_position[i + j] = can_reach_this_position[i]
 
